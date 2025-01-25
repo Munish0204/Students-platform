@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework', 
     'rest_framework.authtoken',
     'api',
 ]
@@ -47,9 +48,10 @@ REST_FRAMEWORK = {
     ),
 }
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'api.authentication.CustomAuthBackend',
+    # 'api.authentication.CustomAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Default Django auth backend (optional if required)
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

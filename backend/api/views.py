@@ -36,26 +36,25 @@ class SignupView(APIView):
         token, created = Token.objects.get_or_create(user=user)
         return JsonResponse({'token': token.key}, status=status.HTTP_201_CREATED)
 
-class CustomAuthToken(APIView):
-    permission_classes = [AllowAny]
+from django.contrib.auth.backends import BaseBackend
+from django.contrib.auth.models import User
 
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+
+class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
-        username_or_email = request.data.get('username_or_email')
-        password = request.data.get('password')
-        user = authenticate(username=username_or_email, password=password)
-        if user is None:
-            try:
-                user = User.objects.get(email=username_or_email)
-                if not user.check_password(password):
-                    user = None
-            except User.DoesNotExist:
-                user = None
-        if user is not None:
-            token, created = Token.objects.get_or_create(user=user)
-            return JsonResponse({'token': token.key})
-        else:
-            return JsonResponse({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
-        
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email,
+        })
+
 
 
 class AwarenessSessionViewSet(viewsets.ModelViewSet):
