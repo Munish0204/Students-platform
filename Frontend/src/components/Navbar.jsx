@@ -29,16 +29,6 @@ const Navbar = () => {
               >
                 Login
               </Link>
-              <Link
-                to="/register"
-                className={`${
-                  location.pathname === "/register"
-                    ? "bg-blue-500 text-white px-3 py-1 rounded"
-                    : "hover:text-blue-200"
-                }`}
-              >
-                Register
-              </Link>
             </>
           ) : (
             <>
