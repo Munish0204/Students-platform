@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Navabar from '../components/Navbar';
 // import heroImage from '../assets/hero-image.jpg'; // Your hero image
 // import sessionImage from '../assets/session-image.jpg'; // Image for sessions
 // import resourcesImage from '../assets/resources-image.jpg'; // Image for resources
@@ -8,7 +9,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Header with Image */}
+      <Navabar />
       <header className="bg-blue-600 text-white text-center py-12">
         <img src={""} alt="Hero" className="w-full h-64 object-cover rounded-lg mb-8" />
         <h1 className="text-4xl font-bold">Tech-Enabled Awareness Platform</h1>
