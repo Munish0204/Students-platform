@@ -7,14 +7,16 @@ import Home from './pages/Home';
 import AboutPage from './pages/About';
 import SessionsPage from './pages/Sessions'
 import BrowseResourcesPage from './pages/BrowseResources';
-import FeedbackPage from './pages/Feedback';
+import FeedbackPage from './pages/Feedback'
+import Sidebar from './components/Sidebar'; 
 
 
 
 const App = () => {
   return (
     <Router>
-      <Navbar /> {/* Display Navbar on all pages */}
+      {/* <Sidebar/> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />

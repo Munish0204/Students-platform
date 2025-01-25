@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
-  
+
   // State to store user input
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Simple validation
@@ -19,13 +20,30 @@ const Login = () => {
       return;
     }
 
-    // You can replace this logic with your authentication logic (e.g., API call)
-    if (username === "admin" && password === "admin") {
-      setError("");
-      // Redirect to dashboard or homepage after successful login
-      navigate("/dashboard");
-    } else {
-      setError("Invalid username or password.");
+    try {
+      // API call to the backend with GET method
+      const response = await axios.get("http://192.168.156.1:8000/users/login/", {
+        params: { username, password }, // Send data as query parameters
+      });
+
+      if (response.status === 200) {
+        // Assume the response contains a token or success message
+        const { token } = response.data;
+
+        // Store the token in localStorage (optional)
+        localStorage.setItem("authToken", token);
+
+        setError("");
+        // Redirect to dashboard or homepage after successful login
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      // Handle error response
+      if (err.response && err.response.status === 401) {
+        setError("Invalid username or password.");
+      } else {
+        setError("An error occurred. Please try again later.");
+      }
     }
   };
 
@@ -33,14 +51,19 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-6">Login</h2>
-        
+
         {/* Error message */}
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
         {/* Login form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label className="block text-sm font-medium" htmlFor="username">Username</label>
+            <label
+              className="block text-sm font-medium"
+              htmlFor="username"
+            >
+              Username
+            </label>
             <input
               type="text"
               id="username"
@@ -52,7 +75,12 @@ const Login = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium" htmlFor="password">Password</label>
+            <label
+              className="block text-sm font-medium"
+              htmlFor="password"
+            >
+              Password
+            </label>
             <input
               type="password"
               id="password"
