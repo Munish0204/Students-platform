@@ -12,11 +12,18 @@ import BrowseResourcesPage from './pages/BrowseResources';
 import FeedbackPage from './pages/Feedback'; // Corrected import statement
 import Navbar from './components/Navbar'; // Assuming Navbar is a component
 import Sidebar from './components/Sidebar'; 
+import Navbar from './components/Navbar';
+
+
+
 import ContactPage from './pages/Contact';
 
 const App = () => {
   return (
     <Router>
+      {/* <Sidebar/> */}
+
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />

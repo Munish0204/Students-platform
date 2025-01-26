@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       // API call to the backend with GET method
-      const response = await axios.get("http://192.168.218.28:8000/users/login/", {
+      const response = await axios.post("http://192.168.154.28:8000/users/login/", {
         params: { username, password }, // Send data as query parameters
       });
 
@@ -31,7 +31,7 @@ const Login = () => {
         const { token } = response.data;
 
         // Store the token in localStorage (optional)
-        localStorage.setItem("authToken", token);
+        localStorage.setItem("username", username);
 
         setError("");
         // Redirect to dashboard or homepage after successful login

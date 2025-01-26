@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Register = () => {
   const [error, setError] = useState("");
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Simple validation
@@ -26,10 +27,28 @@ const Register = () => {
       return;
     }
 
-    // You can replace this logic with your registration logic (e.g., API call)
-    setError("");
-    // Redirect to login page after successful registration
-    navigate("/login");
+    try {
+      // API call to the backend
+      const response = await axios.post("http://192.168.154.28:8000/users/register/", {
+        username,
+        email,
+        password,
+      });
+
+      if (response.status === 201) {
+        // Registration successful
+        setError("");
+        // Redirect to login page after successful registration
+        navigate("/login");
+      }
+    } catch (err) {
+      // Handle error response
+      if (err.response && err.response.data) {
+        setError(err.response.data.error || "An error occurred. Please try again.");
+      } else {
+        setError("An error occurred. Please try again.");
+      }
+    }
   };
 
   return (
