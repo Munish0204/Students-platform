@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       // API call to the backend with GET method
-      const response = await axios.get("http://192.168.156.1:8000/users/login/", {
+      const response = await axios.get("http://192.168.218.28:8000/users/login/", {
         params: { username, password }, // Send data as query parameters
       });
 
