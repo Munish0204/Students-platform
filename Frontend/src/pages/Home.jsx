@@ -1,10 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navabar from '../components/Navbar';
-// import heroImage from '../assets/hero-image.jpg'; // Your hero image
-// import sessionImage from '../assets/session-image.jpg'; // Image for sessions
-// import resourcesImage from '../assets/resources-image.jpg'; // Image for resources
-// import joinImage from '../assets/join-image.jpg'; // Image for join section
+
 
 const Home = () => {
   return (
@@ -80,7 +77,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white text-center py-6">
-        <p>&copy; 2025 Tech-Enabled Awareness Platform. All Rights Reserved.</p>
+        <p>&copy; 2025 Student Portal. All Rights Reserved.</p>
       </footer>
     </div>
   );

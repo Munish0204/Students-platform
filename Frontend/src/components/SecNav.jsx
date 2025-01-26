@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="text-2xl font-bold">
-          <Link to="/" className="hover:text-gray-200">Awareness Platform</Link>
+          <Link to="/" className="hover:text-gray-200">Student Portal</Link>
         </div>
 
         {/* Navigation Links */}
