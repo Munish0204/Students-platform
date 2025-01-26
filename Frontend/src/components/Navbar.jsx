@@ -1,30 +1,32 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-
 const Navbar = () => {
   const location = useLocation();
-  const isLoggedIn = false; // You can replace this with actual user authentication state
+  const isLoggedIn = false; // Replace with actual user authentication state
 
   return (
-    <nav className="bg-blue-600 text-white px-4 py-3 shadow-md">
-      <div className="container mx-auto flex items-center justify-between">
+    <nav className="bg-gray-800 text-white shadow-lg">
+      <div className="container mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold hover:text-blue-200">
+        <Link
+          to="/"
+          className="text-2xl font-bold text-blue-400 hover:text-blue-300"
+        >
           Platform Logo
         </Link>
 
-        {/* Navigation links */}
-        <div className="flex items-center space-x-4">
-          {/* Render Login and Register links when not logged in */}
+        {/* Navigation Links */}
+        <div className="flex items-center space-x-6">
           {!isLoggedIn ? (
             <>
+              {/* Login link */}
               <Link
                 to="/login"
-                className={`${
-                  location.pathname === "/login"
-                    ? "bg-blue-500 text-white px-3 py-1 rounded"
-                    : "hover:text-blue-200"
+                className={`px-4 py-2 rounded-lg transition-all ${
+                  location.pathname === '/login'
+                    ? 'bg-blue-600 text-white'
+                    : 'hover:bg-blue-700 hover:text-white'
                 }`}
               >
                 Login
@@ -32,12 +34,13 @@ const Navbar = () => {
             </>
           ) : (
             <>
+              {/* Logout button */}
               <button
                 onClick={() => {
                   // TODO: Implement actual logout logic
                   console.log('Logging out...');
                 }}
-                className="bg-red-500 hover:bg-red-700 px-3 py-1 rounded"
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-all"
               >
                 Logout
               </button>
