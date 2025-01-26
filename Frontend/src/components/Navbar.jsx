@@ -13,7 +13,7 @@ const Navbar = () => {
           to="/"
           className="text-2xl font-bold text-blue-400 hover:text-blue-300"
         >
-          Platform Logo
+          Student Portal
         </Link>
 
         {/* Navigation Links */}

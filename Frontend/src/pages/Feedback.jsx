@@ -127,7 +127,7 @@ const FeedbackPage = () => {
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white text-center py-6">
-        <p>&copy; 2025 Tech-Enabled Awareness Platform. All Rights Reserved.</p>
+        <p>&copy; 2025 Student Portal. All Rights Reserved.</p>
       </footer>
     </div>
   );
