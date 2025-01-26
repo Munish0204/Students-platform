@@ -11,6 +11,7 @@ import SessionsPage from './pages/Sessions'
 import BrowseResourcesPage from './pages/BrowseResources';
 import FeedbackPage from './pages/Feedback'
 import Sidebar from './components/Sidebar'; 
+import Navbar from './components/Navbar';
 
 
 
@@ -19,7 +20,7 @@ const App = () => {
   return (
     <Router>
       {/* <Sidebar/> */}
-      <Navbar />
+
 
       <Routes>
         <Route path="/" element={<Home />} />
