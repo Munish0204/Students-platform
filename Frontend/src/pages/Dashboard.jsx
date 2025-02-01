@@ -3,7 +3,6 @@ import axios from 'axios';
 import base_url from '../utils/api';
 import Navbar from '../components/Navbar';
 
-
 const Dashboard = () => {
   const [user, setUser] = useState({
     name: '',
@@ -11,6 +10,8 @@ const Dashboard = () => {
     assignmentsSubmitted: 0,
     profilePicture: '',
   });
+
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     axios
@@ -20,6 +21,15 @@ const Dashboard = () => {
       })
       .catch((error) => {
         console.error('Error fetching user data:', error);
+      });
+
+    axios
+      .get(`${base_url}/courses`)
+      .then((response) => {
+        setCourses(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching courses:', error);
       });
   }, []);
 
@@ -44,6 +54,29 @@ const Dashboard = () => {
       <div className="bg-blue-600 text-white p-6 mt-8 rounded-lg shadow-lg text-center">
         <h3 className="text-3xl font-semibold">Assignments Submitted</h3>
         <p className="text-5xl font-bold mt-4">{user.assignmentsSubmitted}</p>
+      </div>
+
+      <div className="mt-8">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">My Courses</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {courses.map((course) => (
+            <div key={course.id} className="bg-white p-4 rounded-lg shadow-md">
+              <img 
+                src={course.image || 'https://via.placeholder.com/300'} 
+                alt={course.title} 
+                className="w-full h-40 object-cover rounded-lg mb-4"
+              />
+              <h3 className="text-xl font-semibold text-gray-900">{course.title}</h3>
+              <p className="text-gray-600 mt-2">{course.description}</p>
+              <button 
+                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" 
+                onClick={() => window.location.href = `/course/${course.id}`}
+              >
+                View Course
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
