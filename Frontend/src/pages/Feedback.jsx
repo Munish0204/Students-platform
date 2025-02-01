@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
+
 
 const FeedbackPage = () => {
   const [formData, setFormData] = useState({
@@ -28,6 +30,8 @@ const FeedbackPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <Navbar/>
+
       {/* Header */}
       <header className="bg-blue-600 text-white text-center py-12">
         <h1 className="text-4xl font-bold">Feedback Page</h1>

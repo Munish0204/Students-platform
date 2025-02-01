@@ -10,8 +10,7 @@ import AttendancePage from './pages/Attendance';
 import SessionsPage from './pages/Sessions';
 import BrowseResourcesPage from './pages/BrowseResources';
 import FeedbackPage from './pages/Feedback'; // Corrected import statement
-import Navbar from './components/Navbar'; // Assuming Navbar is a component
-import Sidebar from './components/Sidebar'; 
+// import Sidebar from './components/Sidebar'; 
 import Navbar from './components/Navbar';
 
 
@@ -22,8 +21,6 @@ const App = () => {
   return (
     <Router>
       {/* <Sidebar/> */}
-
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />

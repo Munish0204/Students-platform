@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+
+
 
 const AssignmentPage = () => {
   const navigate = useNavigate(); // Hook for navigation
@@ -8,10 +11,13 @@ const AssignmentPage = () => {
   const [assignments, setAssignments] = useState([
     { id: 1, title: 'Math Homework', description: 'Complete algebra worksheet.', status: 'Submitted' },
     { id: 2, title: 'Science Project', description: 'Build a model of the solar system.', status: 'Pending' },
-  ]);
+  ]);x
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 relative">
+      <Navbar/>
+
+
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}

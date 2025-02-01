@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Navbar from '../components/Navbar';
+
+
 const BrowseResourcesPage = () => {
   // Example array for resources - ideally, these could be fetched from an API
   const resources = [
@@ -28,6 +31,8 @@ const BrowseResourcesPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <Navbar/>
+
       {/* Header */}
       <header className="bg-blue-600 text-white text-center py-12">
         <h1 className="text-4xl font-bold">Browse Digital Resources</h1>

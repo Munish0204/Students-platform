@@ -1,46 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import base_url from "../utils/api";
 
 const Login = () => {
   const navigate = useNavigate();
 
   // State to store user input
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  // Redirect if already logged in
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Simple validation
-    if (!username || !password) {
+    if (!email || !password) {
       setError("Please fill in both fields.");
       return;
     }
 
+    if (password.length < 6) {
+      setError("Password is too short. It must be at least 6 characters.");
+      return;
+    }
+
     try {
-      // API call to the backend with GET method
-      const response = await axios.post("http://192.168.154.28:8000/users/login/", {
-        params: { username, password }, // Send data as query parameters
+      // API call to the backend
+      const response = await axios.post(`${base_url}/login/`, {
+        email,
+        password,
       });
 
+      // Extract token from response
       if (response.status === 200) {
-        // Assume the response contains a token or success message
         const { token } = response.data;
 
-        // Store the token in localStorage (optional)
-        localStorage.setItem("username", username);
+        // Store the token and email in localStorage
+        localStorage.setItem("token", token);
+        localStorage.setItem("email", email);
 
         setError("");
+
         // Redirect to dashboard or homepage after successful login
         navigate("/dashboard");
       }
     } catch (err) {
       // Handle error response
       if (err.response && err.response.status === 401) {
-        setError("Invalid username or password.");
+        setError("Invalid email or password.");
       } else {
         setError("An error occurred. Please try again later.");
       }
@@ -58,27 +75,21 @@ const Login = () => {
         {/* Login form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label
-              className="block text-sm font-medium"
-              htmlFor="username"
-            >
-              Username
+            <label className="block text-sm font-medium" htmlFor="email">
+              Email
             </label>
             <input
               type="text"
-              id="username"
+              id="email"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <label
-              className="block text-sm font-medium"
-              htmlFor="password"
-            >
+            <label className="block text-sm font-medium" htmlFor="password">
               Password
             </label>
             <input
