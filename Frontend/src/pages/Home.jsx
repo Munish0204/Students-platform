@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Student from '../assets/student.jpeg';
 
 
 const Home = () => {
@@ -8,7 +9,7 @@ const Home = () => {
     <div className="min-h-screen bg-gray-100">
       <Navbar />
       <header className="bg-blue-600 text-white text-center py-12">
-        <img src={""} alt="Hero" className="w-full h-64 object-cover rounded-lg mb-8" />
+        <img src={Student} alt="Hero" className="w-full h-64 object-cover rounded-lg mb-8" />
         <h1 className="text-4xl font-bold">Tech-Enabled Awareness Platform</h1>
         <p className="text-lg mt-4">Empowering kids and students through interactive learning and environment conservation awareness</p>
         <div className="mt-8">
