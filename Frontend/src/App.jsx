@@ -12,7 +12,7 @@ import BrowseResourcesPage from './pages/BrowseResources';
 import FeedbackPage from './pages/Feedback'; // Corrected import statement
 import Navbar from './components/Navbar'; // Assuming Navbar is a component
 import Sidebar from './components/Sidebar'; 
-import Navbar from './components/Navbar';
+
 
 
 
