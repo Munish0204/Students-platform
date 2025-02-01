@@ -10,9 +10,14 @@ import AttendancePage from './pages/Attendance';
 import SessionsPage from './pages/Sessions';
 import BrowseResourcesPage from './pages/BrowseResources';
 import FeedbackPage from './pages/Feedback'; // Corrected import statement
+<<<<<<< HEAD
 import Navbar from './components/Navbar'; // Assuming Navbar is a component
 import Sidebar from './components/Sidebar'; 
 
+=======
+// import Sidebar from './components/Sidebar'; 
+import Navbar from './components/Navbar';
+>>>>>>> bf7c1bfc03f0fb7021d4ba4528897eea3bf27e58
 
 
 
@@ -22,8 +27,6 @@ const App = () => {
   return (
     <Router>
       {/* <Sidebar/> */}
-
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
