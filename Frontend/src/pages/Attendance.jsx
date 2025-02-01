@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from '../components/Navbar';
+
 
 const Attendance = () => {
   const [students, setStudents] = useState([]); // List of students
@@ -40,7 +42,11 @@ const Attendance = () => {
   );
 
   return (
+    
     <div className="container mx-auto p-4">
+      <Navbar/>
+
+
       <h1 className="text-2xl font-bold mb-4">Attendance Page</h1>
 
       {/* Date Picker */}

@@ -1,23 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import base_url from "../utils/api";
 
 const Register = () => {
   const navigate = useNavigate();
 
   // State to store user input
   const [username, setUsername] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
+
+  // Log base URL (for debugging)
+  useEffect(() => {
+    console.log(base_url);
+  }, []);
+
+  // Handle password matching logic
+  useEffect(() => {
+    if (confirmPassword) {
+      if (password === confirmPassword) {
+        setPasswordMessage("Passwords match! ✅");
+        setError(""); // Clear error if previously set
+      } else {
+        setPasswordMessage("Passwords do not match! ❌");
+      }
+    } else {
+      setPasswordMessage(""); // Clear message if confirmPassword is empty
+    }
+  }, [password, confirmPassword]);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Simple validation
-    if (!username || !email || !password || !confirmPassword) {
+    if (
+      !username ||
+      !firstname ||
+      !lastname ||
+      !email ||
+      !password ||
+      !confirmPassword
+    ) {
       setError("Please fill in all the fields.");
       return;
     }
@@ -29,7 +59,9 @@ const Register = () => {
 
     try {
       // API call to the backend
-      const response = await axios.post("http://192.168.154.28:8000/users/register/", {
+      const response = await axios.post(`${base_url}/register/`, {
+        lastname,
+        firstname,
         username,
         email,
         password,
@@ -44,7 +76,9 @@ const Register = () => {
     } catch (err) {
       // Handle error response
       if (err.response && err.response.data) {
-        setError(err.response.data.error || "An error occurred. Please try again.");
+        setError(
+          err.response.data.message || "An error occurred. Please try again."
+        );
       } else {
         setError("An error occurred. Please try again.");
       }
@@ -61,6 +95,34 @@ const Register = () => {
 
         {/* Registration form */}
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium" htmlFor="firstname">
+              First Name
+            </label>
+            <input
+              type="text"
+              id="firstname"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium" htmlFor="lastname">
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="lastname"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
+              required
+            />
+          </div>
+
           <div className="space-y-2">
             <label className="block text-sm font-medium" htmlFor="username">
               Username
@@ -104,7 +166,10 @@ const Register = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium" htmlFor="confirmPassword">
+            <label
+              className="block text-sm font-medium"
+              htmlFor="confirmPassword"
+            >
               Confirm Password
             </label>
             <input
@@ -115,6 +180,16 @@ const Register = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
+            {/* Real-time password match feedback */}
+            <p
+              className={`text-sm mt-1 ${
+                passwordMessage.includes("match")
+                  ? "text-green-500"
+                  : "text-red-500"
+              }`}
+            >
+              {passwordMessage}
+            </p>
           </div>
 
           <button

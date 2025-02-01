@@ -1,8 +1,13 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
+
+
 
 const ContactPage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
+      <Navbar/>
+
       {/* Back Button */}
       <button
         onClick={() => window.history.back()}

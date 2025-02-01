@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navabar from '../components/Navbar';
+import Navbar from '../components/Navbar';
 
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navabar />
+      <Navbar />
       <header className="bg-blue-600 text-white text-center py-12">
         <img src={""} alt="Hero" className="w-full h-64 object-cover rounded-lg mb-8" />
         <h1 className="text-4xl font-bold">Tech-Enabled Awareness Platform</h1>

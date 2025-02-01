@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+
 
 const SessionsPage = () => {
   const navigate = useNavigate(); // Hook for navigation
@@ -7,6 +9,8 @@ const SessionsPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 relative">
       {/* Back Button */}
+      <Navbar/>
+
       <button
         onClick={() => navigate(-1)}
         className="absolute top-4 right-4 px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200"

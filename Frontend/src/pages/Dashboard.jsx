@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import SecNav from '../components/SecNav'
+import base_url from '../utils/api';
+import Navbar from '../components/Navbar';
+
 
 const Dashboard = () => {
   const [user, setUser] = useState({
@@ -12,7 +14,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get('/api/user')
+      .get(`${base_url}/profile`)
       .then((response) => {
         setUser(response.data);
       })
@@ -23,7 +25,8 @@ const Dashboard = () => {
 
   return (
     <div>
-        <SecNav />
+      <Navbar/>
+
       <h1 className="text-4xl font-bold text-blue-600 mb-6">Dashboard</h1>
       <div className="bg-white p-6 rounded-lg shadow-lg flex items-center">
         <div className="w-24 h-24 mr-6">

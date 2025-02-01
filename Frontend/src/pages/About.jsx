@@ -1,11 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+
 
 const AboutPage = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-100 to-green-100 p-6 relative">
+      <Navbar/>
+
       {/* Back Button at Top-Right */}
       <button
         onClick={() => navigate(-1)} // Navigate to the previous page
